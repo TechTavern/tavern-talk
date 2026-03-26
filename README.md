@@ -1,4 +1,4 @@
-# Fish Talk
+# Tavern Talk
 
 Text-to-speech experiments using [Fish Speech 1.5](https://github.com/fishaudio/fish-speech). Runs entirely in Docker.
 
@@ -11,7 +11,7 @@ Text-to-speech experiments using [Fish Speech 1.5](https://github.com/fishaudio/
 
 ```bash
 git clone <this-repo>
-cd fish-talk
+cd tavern-talk
 docker compose up
 ```
 
