@@ -1,0 +1,26 @@
+services:
+  # One-time: downloads model checkpoints (~1.4GB)
+  download-checkpoints:
+    image: python:3.11-slim
+    volumes:
+      - ./checkpoints:/checkpoints
+      - ./download-checkpoints.py:/download-checkpoints.py:ro
+    command: python /download-checkpoints.py
+
+  # Fish Speech 1.5 WebUI
+  webui:
+    image: fishaudio/fish-speech:v1.5.1
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./checkpoints:/app/checkpoints
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    depends_on:
+      download-checkpoints:
+        condition: service_completed_successfully

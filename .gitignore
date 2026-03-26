@@ -1,0 +1,8 @@
+# Model checkpoints (downloaded via setup.sh)
+checkpoints/
+
+# Generated audio output
+output/
+
+# Reference audio files
+references/
