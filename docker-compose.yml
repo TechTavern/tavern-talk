@@ -51,3 +51,19 @@ services:
     profiles: [dev]
     depends_on:
       - api
+
+  # Production: nginx + Express file API
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:80"
+    volumes:
+      - ./voices:/data/voices
+      - ./output:/data/output
+    environment:
+      - DATA_DIR=/data
+    profiles: [prod]
+    depends_on:
+      - api
