@@ -81,7 +81,7 @@ export function Synthesis() {
             onClick={generate}
             disabled={isGenerating}
           >
-            {isGenerating ? 'Synthesizing\u2026' : 'Begin Synthesis'}
+            {isGenerating ? 'Generating\u2026' : 'Generate Audio'}
           </button>
 
           <VoiceSelector />
