@@ -8,7 +8,7 @@ type Tab = 'parameters' | 'advanced';
 
 export function ParameterPanel() {
   const [activeTab, setActiveTab] = useState<Tab>('parameters');
-  const { params, setParam, seedLocked, setSeedLocked } = useSynthesisStore();
+  const { params, setParam, resetParams, seedLocked, setSeedLocked } = useSynthesisStore();
 
   return (
     <section className="card">
@@ -179,6 +179,18 @@ export function ParameterPanel() {
           </div>
         </div>
       )}
+
+      {/* Reset to defaults */}
+      <div style={{ marginTop: 'var(--space-4)', display: 'flex', justifyContent: 'flex-end' }}>
+        <button
+          type="button"
+          className="btn btn--ghost"
+          style={{ fontSize: 'var(--text-label)' }}
+          onClick={resetParams}
+        >
+          Reset to defaults
+        </button>
+      </div>
     </section>
   );
 }
