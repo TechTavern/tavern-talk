@@ -22,7 +22,7 @@ function SettingsSnapshot({ params }: { params: SynthesisParams }) {
       showToast('Enter a name for the preset.', 'error');
       return;
     }
-    await persistAndSavePreset(name);
+    await persistAndSavePreset(name, params);
     showToast(`Preset "${name}" saved.`, 'success');
     setPresetName('');
     setSaving(false);

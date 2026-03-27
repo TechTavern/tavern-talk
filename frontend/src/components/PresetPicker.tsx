@@ -12,9 +12,16 @@ export function usePresetsPersistence() {
   }, [setPresets]);
 }
 
-export async function persistAndSavePreset(name: string) {
+export async function persistAndSavePreset(name: string, params?: import('@/api/types').SynthesisParams) {
   const store = useSynthesisStore.getState();
-  store.savePreset(name);
+  if (params) {
+    // Save specific params (e.g. from lastParams after generation)
+    useSynthesisStore.setState((state) => ({
+      presets: { ...state.presets, [name]: { ...params } },
+    }));
+  } else {
+    store.savePreset(name);
+  }
   const updated = { ...useSynthesisStore.getState().presets };
   await savePresets(updated);
 }

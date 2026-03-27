@@ -63,7 +63,12 @@ export const useSynthesisStore = create<SynthesisState>((set, get) => ({
     })),
   loadPreset: (name) => {
     const preset = get().presets[name];
-    if (preset) set({ params: { ...preset } });
+    if (preset) {
+      set({
+        params: { ...preset },
+        seedLocked: preset.seed !== null,
+      });
+    }
   },
   deletePreset: (name) =>
     set((state) => {
