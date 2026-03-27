@@ -21,9 +21,9 @@ export function useSynthesis() {
     try {
       const request: TTSRequest = {
         text,
-        temperature: store.params.temperature,
-        top_p: store.params.top_p,
-        repetition_penalty: store.params.repetition_penalty,
+        temperature: parseFloat(store.params.temperature.toFixed(2)),
+        top_p: parseFloat(store.params.top_p.toFixed(2)),
+        repetition_penalty: parseFloat(store.params.repetition_penalty.toFixed(2)),
         seed: store.seedLocked ? store.params.seed : store.params.seed,
         chunk_length: store.params.chunk_length,
         max_new_tokens: store.params.max_new_tokens,
