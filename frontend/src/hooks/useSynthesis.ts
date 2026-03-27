@@ -19,12 +19,17 @@ export function useSynthesis() {
     store.setIsGenerating(true);
 
     try {
+      // Always use a seed so every generation is reproducible.
+      // If the user hasn't set one, generate a random one.
+      const seed = store.params.seed ?? Math.floor(Math.random() * 2147483647);
+      store.setParam('seed', seed);
+
       const request: TTSRequest = {
         text,
         temperature: parseFloat(store.params.temperature.toFixed(2)),
         top_p: parseFloat(store.params.top_p.toFixed(2)),
         repetition_penalty: parseFloat(store.params.repetition_penalty.toFixed(2)),
-        seed: store.seedLocked ? store.params.seed : store.params.seed,
+        seed,
         chunk_length: store.params.chunk_length,
         max_new_tokens: store.params.max_new_tokens,
         format: store.params.format,
