@@ -6,14 +6,22 @@ services:
       - ./checkpoints:/checkpoints
       - ./download-checkpoints.py:/download-checkpoints.py:ro
     command: python /download-checkpoints.py
+    profiles: [dev, prod]
 
-  # Fish Speech 1.5 WebUI
-  webui:
+  # Fish Speech 1.5 TTS API Server
+  api:
     image: fishaudio/fish-speech:v1.5.1
-    ports:
-      - "7860:7860"
+    command: >-
+      python tools/api_server.py
+      --listen 0.0.0.0:8080
+      --load-asr-model
+      --llama-checkpoint-path checkpoints/fish-speech-1.5
+      --decoder-checkpoint-path checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth
+    expose:
+      - "8080"
     volumes:
       - ./checkpoints:/app/checkpoints
+      - ./voices:/data/voices:ro
     deploy:
       resources:
         reservations:
@@ -24,3 +32,22 @@ services:
     depends_on:
       download-checkpoints:
         condition: service_completed_successfully
+    profiles: [dev, prod]
+
+  # Development: Vite hot-reload + Express file API
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - ./voices:/data/voices
+      - ./output:/data/output
+    environment:
+      - DATA_DIR=/data
+    profiles: [dev]
+    depends_on:
+      - api
