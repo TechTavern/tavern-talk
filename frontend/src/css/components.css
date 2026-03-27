@@ -1,0 +1,505 @@
+/* Tavern Talk — Components */
+/* Cards, Buttons, Sliders, Textarea, Audio Player, Modifiers, Toasts */
+
+/* ═══ Cards ═══ */
+/* No borders — tonal depth only (DESIGN.md "No-Line Rule") */
+.card {
+  background: var(--surface-high);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.card-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-body);
+  color: var(--tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.char-count {
+  font-size: var(--text-label);
+  color: var(--on-surface-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ Textarea ═══ */
+.script-textarea {
+  width: 100%;
+  min-height: 160px;
+  resize: vertical;
+  background: var(--surface-highest);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.6;
+  padding: var(--space-4);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.script-textarea::placeholder {
+  color: var(--on-surface-muted);
+  opacity: 0.6;
+}
+
+/* Focus: teal ghost border */
+.script-textarea:focus {
+  border-color: var(--secondary);
+}
+
+/* ═══ Card Actions ═══ */
+.card-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ═══ Buttons ═══ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body);
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  transition: all var(--duration-fast) var(--ease-out);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Primary (warm coral) */
+.btn--primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+/* Secondary (teal) */
+.btn--secondary {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  filter: brightness(1.2);
+}
+
+/* Teal variant for voice card */
+.btn--teal {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+}
+
+.btn--teal:hover:not(:disabled) {
+  filter: brightness(1.2);
+}
+
+/* Ghost (tertiary, no background) */
+.btn--ghost {
+  background: transparent;
+  color: var(--on-surface-muted);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  color: var(--on-surface);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* CTA (Begin Synthesis) */
+.btn--cta {
+  background: var(--primary);
+  color: var(--on-primary);
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--cta:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn--cta:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Loading state */
+.btn--cta.is-loading {
+  pointer-events: none;
+}
+
+.btn--cta.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s ease infinite;
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* ═══ Sliders ═══ */
+.slider-group {
+  margin-bottom: var(--space-4);
+}
+
+.slider-group:last-child {
+  margin-bottom: 0;
+}
+
+.slider-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.slider-label {
+  font-size: var(--text-body);
+  color: var(--on-surface);
+  font-weight: 500;
+}
+
+.slider-value {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--tertiary);
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+  text-align: right;
+}
+
+/* Custom range slider */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-lowest);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(255, 185, 93, 0.15);
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--tertiary);
+  cursor: pointer;
+}
+
+.slider::-moz-range-track {
+  height: 6px;
+  background: var(--surface-lowest);
+  border-radius: var(--radius-full);
+}
+
+/* ═══ Alchemical Modifiers ═══ */
+.modifiers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.modifier {
+  cursor: pointer;
+}
+
+.modifier-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.modifier-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-highest);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.modifier-name {
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--on-surface-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.modifier-input:checked + .modifier-body {
+  background: rgba(255, 185, 93, 0.1);
+}
+
+.modifier-input:checked + .modifier-body .modifier-name {
+  color: var(--tertiary);
+}
+
+.modifier:hover .modifier-body {
+  background: var(--surface-highest);
+  filter: brightness(1.1);
+}
+
+/* ═══ Voice Character Card ═══ */
+.card--voice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.voice-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.voice-avatar svg {
+  width: 100%;
+  height: 100%;
+}
+
+.voice-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.voice-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-title);
+  color: var(--on-surface);
+}
+
+.voice-desc {
+  font-size: var(--text-body);
+  color: var(--on-surface-muted);
+}
+
+.voice-tags {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.tag {
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--on-surface-muted);
+  background: var(--surface-highest);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+}
+
+/* ═══ Audio Player ═══ */
+.card--preview {
+  background: var(--surface-high);
+}
+
+.audio-waveform {
+  background: var(--surface-lowest);
+  border-radius: var(--radius-md);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+  position: relative;
+}
+
+.audio-waveform-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--on-surface-muted);
+  font-size: var(--text-body);
+  opacity: 0.5;
+}
+
+/* Waveform bars animation */
+.audio-waveform-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 60px;
+  padding: 0 var(--space-3);
+  width: 100%;
+}
+
+.audio-waveform-bars .bar {
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--tertiary);
+  opacity: 0.6;
+  transition: height var(--duration-fast) var(--ease-out);
+}
+
+.audio-waveform-bars.is-playing .bar {
+  animation: waveform-pulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes waveform-pulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.9; }
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.audio-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  color: var(--on-surface);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  transition: color var(--duration-fast) var(--ease-out);
+  text-decoration: none;
+}
+
+.audio-btn:hover {
+  color: var(--tertiary);
+}
+
+.audio-time {
+  font-size: var(--text-label);
+  color: var(--on-surface-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.audio-progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--surface-lowest);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.audio-progress-fill {
+  height: 100%;
+  background: var(--tertiary);
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 100ms linear;
+}
+
+/* ═══ Toast Notifications ═══ */
+.toast {
+  pointer-events: auto;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--on-surface);
+  box-shadow: var(--shadow-float);
+  animation: toast-in var(--duration-normal) var(--ease-out);
+  backdrop-filter: var(--blur-glass);
+}
+
+.toast--error {
+  background: rgba(154, 16, 16, 0.85);
+}
+
+.toast--success {
+  background: rgba(16, 77, 98, 0.85);
+}
+
+.toast.is-leaving {
+  animation: toast-out var(--duration-fast) var(--ease-out) forwards;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
