@@ -4,7 +4,7 @@ import { healthCheck } from '@/api/tts';
 import { useToast } from '@/components/Toast';
 import { SliderControl } from '@/components/SliderControl';
 import type { AppSettings, SynthesisParams } from '@/api/types';
-import { DEFAULT_SETTINGS, DEFAULT_PARAMS } from '@/api/types';
+import { DEFAULT_SETTINGS } from '@/api/types';
 
 export function Settings() {
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
