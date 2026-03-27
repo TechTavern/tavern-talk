@@ -2,7 +2,6 @@
 /* Sidebar + Top Nav + Main Content Grid */
 
 /* ═══ Page Grid ═══ */
-body,
 #root {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -108,8 +107,8 @@ body,
 /* ═══ Main ═══ */
 .main {
   padding: var(--space-6) var(--space-8) var(--space-12);
-  max-width: 1100px;
   width: 100%;
+  overflow-y: auto;
   /* subtle warm radial glow behind content */
   background:
     radial-gradient(ellipse 60% 40% at 30% 10%, rgba(154, 16, 16, 0.12) 0%, transparent 70%),
@@ -180,7 +179,7 @@ body,
 /* ═══ Content Grid (two column) ═══ */
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr minmax(280px, 360px);
   gap: var(--space-6);
   align-items: start;
 }
@@ -211,7 +210,7 @@ body,
 
 /* ═══ Responsive ═══ */
 @media (max-width: 900px) {
-  body {
+  #root {
     grid-template-columns: 1fr;
   }
 

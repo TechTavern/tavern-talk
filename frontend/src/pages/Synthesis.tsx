@@ -67,8 +67,6 @@ export function Synthesis() {
         </div>
 
         <div className="col-right">
-          <VoiceSelector />
-
           <AudioPlayer url={lastAudioUrl} autoPlay />
 
           {lastParams && <SettingsSnapshot params={lastParams} />}
@@ -80,6 +78,8 @@ export function Synthesis() {
           >
             {isGenerating ? 'Synthesizing\u2026' : 'Begin Synthesis'}
           </button>
+
+          <VoiceSelector />
         </div>
       </div>
     </>

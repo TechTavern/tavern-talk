@@ -14,7 +14,6 @@ services:
     command: >-
       python tools/api_server.py
       --listen 0.0.0.0:8080
-      --load-asr-model
       --llama-checkpoint-path checkpoints/fish-speech-1.5
       --decoder-checkpoint-path checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth
     expose:
