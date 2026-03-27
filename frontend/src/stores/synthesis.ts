@@ -25,6 +25,7 @@ interface SynthesisState {
   setLastResult: (audioUrl: string | null, params: SynthesisParams | null) => void;
 
   presets: Record<string, SynthesisParams>;
+  setPresets: (presets: Record<string, SynthesisParams>) => void;
   savePreset: (name: string) => void;
   loadPreset: (name: string) => void;
   deletePreset: (name: string) => void;
@@ -55,6 +56,7 @@ export const useSynthesisStore = create<SynthesisState>((set, get) => ({
   setLastResult: (lastAudioUrl, lastParams) => set({ lastAudioUrl, lastParams }),
 
   presets: {},
+  setPresets: (presets) => set({ presets }),
   savePreset: (name) =>
     set((state) => ({
       presets: { ...state.presets, [name]: { ...state.params } },

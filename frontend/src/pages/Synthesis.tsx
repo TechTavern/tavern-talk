@@ -1,6 +1,7 @@
 import { useSynthesisStore } from '@/stores/synthesis';
 import { useSynthesis } from '@/hooks/useSynthesis';
 import { ParameterPanel } from '@/components/ParameterPanel';
+import { PresetPicker } from '@/components/PresetPicker';
 import { VoiceSelector } from '@/components/VoiceSelector';
 import { AudioPlayer } from '@/components/AudioPlayer';
 import type { SynthesisParams } from '@/api/types';
@@ -64,6 +65,10 @@ export function Synthesis() {
           </section>
 
           <ParameterPanel />
+
+          <section className="card">
+            <PresetPicker />
+          </section>
         </div>
 
         <div className="col-right">

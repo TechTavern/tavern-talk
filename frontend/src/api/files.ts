@@ -86,6 +86,25 @@ export async function saveSettings(settings: AppSettings): Promise<void> {
   if (!res.ok) throw new Error(`Failed to save settings: ${res.status}`);
 }
 
+// ── Presets ──
+
+export async function getPresets(): Promise<Record<string, import('./types').SynthesisParams>> {
+  const res = await fetch('/files/presets');
+  if (!res.ok) throw new Error(`Failed to get presets: ${res.status}`);
+  return res.json();
+}
+
+export async function savePresets(presets: Record<string, import('./types').SynthesisParams>): Promise<void> {
+  const res = await fetch('/files/presets', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(presets),
+  });
+  if (!res.ok) throw new Error(`Failed to save presets: ${res.status}`);
+}
+
+// ── Voice reference audio loader ──
+
 export async function loadVoiceReferenceBase64(id: string): Promise<string> {
   const res = await fetch(getVoiceAudioUrl(id));
   if (!res.ok) throw new Error(`Failed to load voice audio: ${res.status}`);

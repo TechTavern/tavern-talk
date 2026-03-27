@@ -166,6 +166,23 @@ app.put('/files/settings', (req, res) => {
   res.json({ ok: true });
 });
 
+// ── Presets ──
+
+const PRESETS_PATH = path.join(OUTPUT_DIR, 'presets.json');
+
+app.get('/files/presets', (_req, res) => {
+  if (!fs.existsSync(PRESETS_PATH)) {
+    res.json({});
+    return;
+  }
+  res.json(JSON.parse(fs.readFileSync(PRESETS_PATH, 'utf-8')));
+});
+
+app.put('/files/presets', (req, res) => {
+  fs.writeFileSync(PRESETS_PATH, JSON.stringify(req.body, null, 2));
+  res.json({ ok: true });
+});
+
 // ── Start ──
 
 const PORT = 3001;
