@@ -107,7 +107,7 @@ export function ParameterPanel() {
             label="Repetition Penalty"
             tooltip="Prevents the voice from getting stuck repeating sounds. Turn it up if you hear stuttering or loops."
             value={params.repetition_penalty}
-            min={0.9} max={2.0} step={0.05}
+            min={0.9} max={1.95} step={0.05}
             displayValue={params.repetition_penalty.toFixed(2)}
             onChange={(v) => setParam('repetition_penalty', v)}
           />
