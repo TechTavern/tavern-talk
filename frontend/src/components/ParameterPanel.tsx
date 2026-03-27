@@ -89,7 +89,7 @@ export function ParameterPanel() {
         <div>
           <SliderControl
             label="Temperature"
-            tooltip="Controls randomness. Lower = more deterministic, higher = more creative."
+            tooltip="How much the voice improvises. Low keeps it steady and predictable. High adds variation and expressiveness."
             value={params.temperature}
             min={0.1} max={1.0} step={0.05}
             displayValue={params.temperature.toFixed(2)}
@@ -97,7 +97,7 @@ export function ParameterPanel() {
           />
           <SliderControl
             label="Top P"
-            tooltip="Nucleus sampling. Controls diversity of token selection."
+            tooltip="How many word choices the model considers. Low stays safe and consistent. High explores more unusual phrasing."
             value={params.top_p}
             min={0.1} max={1.0} step={0.05}
             displayValue={params.top_p.toFixed(2)}
@@ -105,7 +105,7 @@ export function ParameterPanel() {
           />
           <SliderControl
             label="Repetition Penalty"
-            tooltip="Penalizes repeated tokens. Higher values reduce repetitive speech."
+            tooltip="Prevents the voice from getting stuck repeating sounds. Turn it up if you hear stuttering or loops."
             value={params.repetition_penalty}
             min={0.9} max={2.0} step={0.05}
             displayValue={params.repetition_penalty.toFixed(2)}
@@ -125,14 +125,14 @@ export function ParameterPanel() {
         <div>
           <SliderControl
             label="Chunk Length"
-            tooltip="Text chunk size for iterative generation. Higher = more coherent."
+            tooltip="How much text is processed at once. Bigger chunks sound more natural but take slightly longer."
             value={params.chunk_length}
             min={100} max={300} step={10}
             onChange={(v) => setParam('chunk_length', v)}
           />
           <SliderControl
             label="Max New Tokens"
-            tooltip="Maximum tokens generated. Higher = longer output, potentially lower quality."
+            tooltip="Limits how long the audio can be. Increase for longer scripts, but very high values may reduce quality."
             value={params.max_new_tokens}
             min={256} max={2048} step={64}
             onChange={(v) => setParam('max_new_tokens', v)}
@@ -140,19 +140,19 @@ export function ParameterPanel() {
           <div className="modifiers-grid" style={{ marginTop: 'var(--space-3)' }}>
             <ToggleControl
               label="Normalize Text"
-              tooltip="Normalize numbers and abbreviations for stability."
+              tooltip="Converts numbers and abbreviations into spoken words (e.g. '3pm' becomes 'three PM'). Keeps the voice from stumbling."
               checked={params.normalize}
               onChange={(v) => setParam('normalize', v)}
             />
             <ToggleControl
               label="Streaming"
-              tooltip="Stream audio as it generates (WAV only)."
+              tooltip="Start playing audio before the full clip is finished. Faster feedback, but only works with WAV format."
               checked={params.streaming}
               onChange={(v) => setParam('streaming', v)}
             />
             <ToggleControl
               label="Memory Cache"
-              tooltip="Cache encoded reference audio for faster repeat synthesis."
+              tooltip="Remembers your voice profile between generations so the next one starts faster."
               checked={params.use_memory_cache === 'on'}
               onChange={(v) => setParam('use_memory_cache', v ? 'on' : 'off')}
             />
