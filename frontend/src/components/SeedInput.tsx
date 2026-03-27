@@ -14,8 +14,8 @@ export function SeedInput({ seed, locked, onSeedChange, onLockedChange }: SeedIn
 
   return (
     <div className="slider-group">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-        <span className="slider-label" style={{ marginRight: 'auto' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+        <span className="slider-label" style={{ whiteSpace: 'nowrap' }}>
           Seed
           <Tooltip content="A magic number that makes results repeatable. Lock it to get the exact same voice output every time you generate with the same text.">
             <span className="tooltip-trigger">
@@ -25,12 +25,29 @@ export function SeedInput({ seed, locked, onSeedChange, onLockedChange }: SeedIn
             </span>
           </Tooltip>
         </span>
+        <input
+          type="number"
+          value={seed ?? ''}
+          placeholder="Random"
+          onChange={(e) => onSeedChange(e.target.value ? parseInt(e.target.value, 10) : null)}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            background: 'var(--surface-highest)',
+            border: '2px solid transparent',
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--on-surface)',
+            padding: 'var(--space-1) var(--space-2)',
+            fontFamily: 'var(--font-body)',
+            fontSize: 'var(--text-body)',
+          }}
+        />
         <Tooltip content={locked ? 'Unlock seed — each generation will sound different' : 'Lock seed — keep getting the same result'}>
           <button
             type="button"
             onClick={() => onLockedChange(!locked)}
             className="btn btn--ghost"
-            style={{ padding: 'var(--space-1)', color: locked ? 'var(--tertiary)' : undefined }}
+            style={{ padding: 'var(--space-1)', color: locked ? 'var(--tertiary)' : undefined, flexShrink: 0 }}
           >
             {locked ? '\u{1F512}' : '\u{1F513}'}
           </button>
@@ -40,28 +57,12 @@ export function SeedInput({ seed, locked, onSeedChange, onLockedChange }: SeedIn
             type="button"
             onClick={randomize}
             className="btn btn--ghost"
-            style={{ padding: 'var(--space-1)' }}
+            style={{ padding: 'var(--space-1)', flexShrink: 0 }}
           >
             &#127922;
           </button>
         </Tooltip>
       </div>
-      <input
-        type="number"
-        value={seed ?? ''}
-        placeholder="Random — leave empty for a different result each time"
-        onChange={(e) => onSeedChange(e.target.value ? parseInt(e.target.value, 10) : null)}
-        style={{
-          width: '100%',
-          background: 'var(--surface-highest)',
-          border: '2px solid transparent',
-          borderRadius: 'var(--radius-md)',
-          color: 'var(--on-surface)',
-          padding: 'var(--space-2) var(--space-3)',
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-body)',
-        }}
-      />
     </div>
   );
 }
