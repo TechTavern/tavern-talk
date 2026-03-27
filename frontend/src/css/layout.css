@@ -1,0 +1,228 @@
+/* Tavern Talk — Layout */
+/* Sidebar + Top Nav + Main Content Grid */
+
+/* ═══ Page Grid ═══ */
+#root {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+/* ═══ Sidebar ═══ */
+.sidebar {
+  background: var(--surface-lowest);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-4);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-brand-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sidebar-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-body);
+  color: var(--on-surface);
+}
+
+.sidebar-brand-role {
+  font-size: var(--text-label);
+  color: var(--tertiary);
+  font-weight: 500;
+}
+
+.sidebar-brand-sub {
+  font-size: var(--text-label);
+  color: var(--on-surface-muted);
+}
+
+/* ═══ Sidebar Nav ═══ */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  color: var(--on-surface-muted);
+  text-decoration: none;
+  font-size: var(--text-body);
+  font-weight: 500;
+  transition: color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+}
+
+.sidebar-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sidebar-link:hover {
+  color: var(--on-surface);
+  background: var(--surface-high);
+}
+
+.sidebar-link.active {
+  color: var(--tertiary);
+  background: rgba(255, 185, 93, 0.08);
+}
+
+/* ═══ Sidebar Footer ═══ */
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-4);
+}
+
+/* ═══ Main ═══ */
+.main {
+  padding: var(--space-6) var(--space-8) var(--space-12);
+  width: 100%;
+  overflow-y: auto;
+  /* subtle warm radial glow behind content */
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 10%, rgba(154, 16, 16, 0.12) 0%, transparent 70%),
+    var(--bg);
+}
+
+/* ═══ Top Nav (Tavern Tabs) ═══ */
+.topnav {
+  display: flex;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.topnav-tab {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-body);
+  color: var(--on-surface-muted);
+  text-decoration: none;
+  padding-bottom: var(--space-2);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.topnav-tab:hover {
+  color: var(--on-surface);
+}
+
+.topnav-tab.active {
+  color: var(--tertiary);
+}
+
+/* Candlelight glow instead of underline */
+.topnav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 4px;
+  background: var(--tertiary);
+  border-radius: var(--radius-full);
+  filter: blur(4px);
+}
+
+/* ═══ Hero ═══ */
+.hero {
+  margin-bottom: var(--space-8);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: var(--letter-tight);
+  color: var(--tertiary);
+  line-height: 1.15;
+  margin-bottom: var(--space-2);
+}
+
+.hero-sub {
+  color: var(--on-surface-muted);
+  font-size: var(--text-body-lg);
+  max-width: 520px;
+}
+
+/* ═══ Content Grid (two column) ═══ */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 360px);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.col-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ═══ Toast Container ═══ */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 900px) {
+  #root {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    padding: var(--space-4);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
